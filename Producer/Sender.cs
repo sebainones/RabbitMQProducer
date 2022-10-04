@@ -17,12 +17,8 @@ public class Sender
                               exclusive: false,
                               autoDelete: false,
                               arguments: null);
+            var message = GetMessage(args);
 
-            string message = "Hello Seba!";
-            if (args.Length != 0)
-            {
-                message = args[0];
-            }
             var body = Encoding.UTF8.GetBytes(message);
 
             channel.BasicPublish(exchange: "",
@@ -32,7 +28,12 @@ public class Sender
             Console.WriteLine(" [x] Sent {0}", message);
         }
 
-        Console.WriteLine(" Press [enter] to exit.");
-        Console.ReadLine();
+        // Console.WriteLine(" Press [enter] to exit.");
+        // Console.ReadLine();
+    }
+
+    private static string GetMessage(string[] args)
+    {
+        return ((args.Length > 0) ? string.Join(" ", args) : "Hello Sebas!");
     }
 }
